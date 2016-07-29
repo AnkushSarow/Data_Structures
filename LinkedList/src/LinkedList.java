@@ -107,9 +107,9 @@ public class LinkedList<E>
             throw new NoSuchElementException();
         }
 
-        Node current = head.next;
-        head = null;
-        head = current;
+        Node current = head;
+        head = head.next;
+        current.next = null;
 
         --listSize;
     }
@@ -179,6 +179,8 @@ public class LinkedList<E>
             remove();
         }
 
+        head = null;
+
         listSize = 0;
     }
 
@@ -212,9 +214,12 @@ public class LinkedList<E>
         String[] months = {"January", "February", "March", "April", "May", "June", "July",
                 "August", "September", "October", "November", "December"};
 
-        for(int i = 0; i < months.length; ++i)
+        list.addToHead(months[0]);
+        list.add(months[11]);
+
+        for(int i = 1; i < 11; ++i)
         {
-            list.add(months[months.length - (1 + i)],0);
+            list.add(months[11-i],1);
         }
 
         System.out.println("After adding the months of the year, the elements of the list are: ");
@@ -230,11 +235,9 @@ public class LinkedList<E>
         }
 */
         //Testing remove(int index)
-        list.remove(11);
-        list.remove(0);
-        for(int i = 0; i < 10; ++i)
+        for(int i = 0; i < 12; ++i)
         {
-            list.remove(0);
+            list.remove(11 - i);
         }
 
         System.out.println("Size of linked list after removals: " + list.getListSize());
