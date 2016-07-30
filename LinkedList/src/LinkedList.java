@@ -7,163 +7,131 @@
 
 import java.util.NoSuchElementException;
 
-public class LinkedList<E>
-{
+public class LinkedList<E> {
 
     private Node head;
-    private int listSize = 0;
+    private int size;
 
     //Private inner class to represent a Node
-    private class Node
-    {
+    private class Node {
         E data;
         Node next;
 
-        public Node(E data, Node next)
-        {
+        public Node(E data) {
+            this.data = data;
+        }
+
+        public Node(E data, Node next) {
             this.data = data;
             this.next = next;
         }
     }
 
-    public LinkedList()
-    {
-        Node head = new Node(null,null);
-        listSize = 0;
+    public LinkedList() {
+        this.head = new Node(null);
+        size = 0;
     }
 
-
-    public int getListSize()
+    public void addFirst(E data)
     {
-        return listSize;
+        Node newNode = new Node(data);
+        newNode.next = head;
+        head = newNode;
+        ++size;
     }
 
     //Adds a node to the end of the linked list
-    public void add(E data)
-    {
-        if(head == null)
-        {
-            addToHead(data);
+    public void add(E data) {
+        Node newNode = new Node(data);
+
+        if (isEmpty()) {
+            addFirst(data);
             return;
         }
 
         Node current = head;
-
-        while(current.next != null)
-        {
+        while (current.next != null) {
             current = current.next;
         }
+        current.next = newNode;
 
-        Node insertNode = new Node(data,null);
-        current.next = insertNode;
-
-        ++listSize;
+        ++size;
     }
 
     //Add to a specific index in the linked list
     //0 = head, 1 = head.next, and so on
-    public void add(E data, int index)
-    {
-        if(index == 0)
-        {
-            addToHead(data);
-            return;
-        }
-
-        if(index < 0 || index >= listSize)
-        {
+    public void add(E data, int index) {
+        if (index < 0 || index > size - 1) {
             throw new IndexOutOfBoundsException();
         }
 
-        int indexCounter = 0;
-        Node current = head;
-
-        while(indexCounter < (index-1))
-        {
-            current = current.next;
-            ++indexCounter;
+        if (index == 0) {
+            addFirst(data);
+            return;
         }
 
-        Node insertNode = new Node(data, current.next);
-        current.next = insertNode;
+        int counter = 0;
+        Node current = head;
+        while (counter < (index-1)) {
+            current = current.next;
+            ++counter;
+        }
+        Node newNode = new Node(data, current.next);
+        current.next = newNode;
 
-        ++listSize;
-    }
-
-    //Adds a node to the beginning of the linked list
-    public void addToHead(E data)
-    {
-        Node newHead = new Node(data,head);
-        head = newHead;
-
-        ++listSize;
+        ++size;
     }
 
     //Remove the head of the linked list
-    public void remove()
-    {
-        if(head == null)
-        {
+    public void remove() {
+        if (isEmpty()) {
             throw new NoSuchElementException();
         }
 
         Node current = head;
         head = head.next;
         current.next = null;
-
-        --listSize;
+        --size;
     }
 
     //Retrieve the data from the node at the index and remove it front the linked list
-    public E remove(int index)
-    {
-        if(index == 0)
-        {
+    public E remove(int index) {
+        if (index < 0 || index > size - 1) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        if (index == 0) {
             Node temp = head;
             remove();
             return temp.data;
         }
 
-        if(index < 0 || index >= listSize)
-        {
-            throw new IndexOutOfBoundsException();
-        }
-
         int indexCounter = 0;
         Node current = head;
-
         //Loop until one before node to be removed
-        while(indexCounter < (index - 1))
-        {
+        while (indexCounter < (index - 1)) {
             current = current.next;
             ++indexCounter;
         }
-
         //Create a temporary node to represent the node to be removed
         Node tempNode = current.next;
-
         //Set the current node to point to the node after the node to be removed
         current.next = current.next.next;
-
         //Now set the temp node that is meant to be removed to point to null
         tempNode.next = null;
 
-        --listSize;
+        --size;
         return (tempNode.data);
     }
 
-    public E get(int index)
-    {
-        if(index < 0 || index >= listSize)
-        {
+    public E get(int index) {
+        if( index < 0 || index > size - 1) {
             throw new IndexOutOfBoundsException();
         }
 
         int indexCounter = 0;
         Node current = head;
-
-        while(indexCounter != index)
-        {
+        while (indexCounter != index) {
             current = current.next;
             ++indexCounter;
         }
@@ -171,25 +139,20 @@ public class LinkedList<E>
         return current.data;
     }
 
+    public int Size() { return size; }
+
+    public boolean isEmpty() { return size == 0; }
+
     //Clears the linked list
-    public void clear()
-    {
-        while(head != null)
-        {
-            remove();
-        }
-
+    public void clear() {
         head = null;
-
-        listSize = 0;
+        size = 0;
     }
 
-    public void printLinkedList()
-    {
+    public void printLinkedList() {
         Node current = head;
 
-        while(current != null)
-        {
+        while (current != null) {
             System.out.println(current.data);
             current = current.next;
         }
@@ -199,61 +162,5 @@ public class LinkedList<E>
     public static void main(String[] args)
     {
         LinkedList<String> list = new LinkedList<String>();
-
-        System.out.println("Size of linked list: " + list.getListSize());
-/*
-        try
-        {
-            list.remove(); //Removal on empty linked list - this throws NoSuchElementException
-        }
-        catch(NoSuchElementException e)
-        {
-            System.err.println("Cannot remove from empty linked list");
-        }
-*/
-        String[] months = {"January", "February", "March", "April", "May", "June", "July",
-                "August", "September", "October", "November", "December"};
-
-        list.addToHead(months[0]);
-        list.add(months[11]);
-
-        for(int i = 1; i < 11; ++i)
-        {
-            list.add(months[11-i],1);
-        }
-
-        System.out.println("After adding the months of the year, the elements of the list are: ");
-        list.printLinkedList();
-/*
-        try
-        {
-            list.remove(12); //Attempting to remove out of range - this throws IndexOutOfBounds exception
-        }
-        catch(IndexOutOfBoundsException e)
-        {
-            System.err.println("Cannot remove - index out of bounds");
-        }
-*/
-        //Testing remove(int index)
-        for(int i = 0; i < 12; ++i)
-        {
-            list.remove(11 - i);
-        }
-
-        System.out.println("Size of linked list after removals: " + list.getListSize());
-        System.out.println("List after removal: ");
-        list.printLinkedList();
-
-        //Build the list again and clear it
-        for(int i = 0; i < months.length; ++i)
-        {
-            list.add(months[i]);
-        }
-        System.out.println("Size of linked list after entering items: " + list.getListSize());
-
-        list.clear();
-
-        list.printLinkedList();
-        System.out.println("Size of linked list after clearing: " + list.getListSize());
     }
 }
