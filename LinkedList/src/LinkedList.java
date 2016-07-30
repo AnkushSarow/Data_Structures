@@ -32,8 +32,7 @@ public class LinkedList<E> {
         size = 0;
     }
 
-    public void addFirst(E data)
-    {
+    public void addFirst(E data) {
         Node newNode = new Node(data);
         newNode.next = head;
         head = newNode;
@@ -72,7 +71,7 @@ public class LinkedList<E> {
 
         int counter = 0;
         Node current = head;
-        while (counter < (index-1)) {
+        while (counter < (index - 1)) {
             current = current.next;
             ++counter;
         }
@@ -88,9 +87,7 @@ public class LinkedList<E> {
             throw new NoSuchElementException();
         }
 
-        Node current = head;
         head = head.next;
-        current.next = null;
         --size;
     }
 
@@ -101,9 +98,9 @@ public class LinkedList<E> {
         }
 
         if (index == 0) {
-            Node temp = head;
+            E item = head.data;
             remove();
-            return temp.data;
+            return item;
         }
 
         int indexCounter = 0;
@@ -113,7 +110,7 @@ public class LinkedList<E> {
             current = current.next;
             ++indexCounter;
         }
-        //Create a temporary node to represent the node to be removed
+        //Temporary node to represent the node to be removed
         Node tempNode = current.next;
         //Set the current node to point to the node after the node to be removed
         current.next = current.next.next;
@@ -125,7 +122,7 @@ public class LinkedList<E> {
     }
 
     public E get(int index) {
-        if( index < 0 || index > size - 1) {
+        if (index < 0 || index > size - 1) {
             throw new IndexOutOfBoundsException();
         }
 
@@ -139,13 +136,20 @@ public class LinkedList<E> {
         return current.data;
     }
 
-    public int Size() { return size; }
+    public int Size() {
+        return size;
+    }
 
-    public boolean isEmpty() { return size == 0; }
+    public boolean isEmpty() {
+        return size == 0;
+    }
 
     //Clears the linked list
     public void clear() {
-        head = null;
+        while (head != null) {
+            remove();
+        }
+
         size = 0;
     }
 
@@ -156,11 +160,5 @@ public class LinkedList<E> {
             System.out.println(current.data);
             current = current.next;
         }
-    }
-
-    //Test the various methods of the linked list class
-    public static void main(String[] args)
-    {
-        LinkedList<String> list = new LinkedList<String>();
     }
 }

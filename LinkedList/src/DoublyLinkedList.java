@@ -8,7 +8,7 @@
 import java.util.NoSuchElementException;
 
 public class DoublyLinkedList<E> {
-    private int listSize;
+    private int size;
     private Node head;
     private Node tail;
 
@@ -32,7 +32,7 @@ public class DoublyLinkedList<E> {
     }
 
     public DoublyLinkedList() {
-        listSize = 0;
+        size = 0;
         head = new Node();
         tail = new Node();
     }
@@ -52,7 +52,7 @@ public class DoublyLinkedList<E> {
         tail.next = insertNode;
         tail = insertNode;
 
-        ++listSize;
+        ++size;
     }
 
     /**
@@ -61,7 +61,7 @@ public class DoublyLinkedList<E> {
      * @param index - Position in which the desired element is to be added (First index is 0)
      */
     public void add(E data, int index) {
-        if (index < 0 || index > listSize - 1) {
+        if (index < 0 || index > size - 1) {
             throw new IndexOutOfBoundsException();
         }
 
@@ -75,7 +75,7 @@ public class DoublyLinkedList<E> {
         current.previous.next = newNode;
         current.previous = newNode;
 
-        ++listSize;
+        ++size;
     }
 
     /**
@@ -100,7 +100,7 @@ public class DoublyLinkedList<E> {
             head.previous = insertNode;
             head = insertNode;
         }
-        ++listSize;
+        ++size;
     }
 
     /**
@@ -116,11 +116,14 @@ public class DoublyLinkedList<E> {
         current.previous = null;
         current.next = null;
 
-        if (listSize == 1) {
+        if (size > 1) {
+            head.previous = null;
+        }
+        if (size == 1) {
             tail = head;
         }
 
-        --listSize;
+        --size;
     }
 
     /**
@@ -141,7 +144,7 @@ public class DoublyLinkedList<E> {
         tail.previous = null;
         tail = current;
 
-        --listSize;
+        --size;
     }
 
     /**
@@ -149,7 +152,7 @@ public class DoublyLinkedList<E> {
      * @param index - position in which the element resides (First element resides at index 0)
      */
     public E remove(int index) {
-        if (index < 0 || index > listSize - 1) {
+        if (index < 0 || index > size - 1) {
             throw new IndexOutOfBoundsException();
         }
 
@@ -159,7 +162,7 @@ public class DoublyLinkedList<E> {
             return data;
         }
 
-        if (index == listSize - 1) {
+        if (index == size - 1) {
             E data = tail.data;
             removeLast();
             return data;
@@ -167,17 +170,17 @@ public class DoublyLinkedList<E> {
 
         Node current = findNode(index);
 
-        current.previous.next = current.next;
-        current.next.previous = current.previous;
+        (current.previous).next = current.next;
+        (current.next).previous = current.previous;
         current.next = null;
         current.previous = null;
 
-        --listSize;
+        --size;
         return current.data;
     }
 
     public E get(int index) {
-        if (index < 0 || index >= listSize) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
         return findNode(index).data;
@@ -187,17 +190,17 @@ public class DoublyLinkedList<E> {
      * Clear the doubly linked list
      */
     public void clearDoublyLinkedList() {
-        head = null;
-        tail = null;
-        listSize = 0;
+        while (head != null) {
+            removeFirst();
+        }
+        size = 0;
     }
 
     /**
      * @return - Returns the list size
      */
-    public int getListSize()
-    {
-        return listSize;
+    public int getsize() {
+        return size;
     }
 
     /**
@@ -205,9 +208,8 @@ public class DoublyLinkedList<E> {
      *
      * @return - True if list is empty, false if not
      */
-    public boolean isEmpty()
-    {
-        return (listSize == 0);
+    public boolean isEmpty() {
+        return (size == 0);
     }
 
     /**
@@ -226,11 +228,11 @@ public class DoublyLinkedList<E> {
      * Retrieve element at specific index
      */
     private Node findNode(int index) {
-        if (index < 0 || index > listSize - 1) {
+        if (index < 0 || index > size - 1) {
             throw new IndexOutOfBoundsException();
         }
 
-        if (index < getListSize()/2) {
+        if (index < getsize()/2) {
             Node current = head;
             int indexCounter = 0;
             while (indexCounter != index) {
@@ -241,7 +243,7 @@ public class DoublyLinkedList<E> {
         }
         else {
             Node current = tail;
-            int indexCounter = getListSize() - 1;
+            int indexCounter = getsize() - 1;
             while (indexCounter != index) {
                 current = current.previous;
                 --indexCounter;
