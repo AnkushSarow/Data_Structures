@@ -7,8 +7,7 @@
 
 import java.util.NoSuchElementException;
 
-public class DoublyLinkedList<E>
-{
+public class DoublyLinkedList<E> {
     private int listSize;
     private Node head;
     private Node tail;
@@ -107,8 +106,7 @@ public class DoublyLinkedList<E>
     /**
      * Removes the first element of the doubly linked list
      */
-    public void removeFirst()
-    {
+    public void removeFirst() {
         if (isEmpty()) {
             throw new NoSuchElementException();
         }
@@ -128,8 +126,7 @@ public class DoublyLinkedList<E>
     /**
      * Removes the last element of the doubly linked list. If there is only one element, it calls removeFirst()
      */
-    public void removeLast()
-    {
+    public void removeLast() {
         if (isEmpty()) {
             throw new NoSuchElementException();
         }
@@ -151,8 +148,7 @@ public class DoublyLinkedList<E>
      * Removes a specific element at a given index
      * @param index - position in which the element resides (First element resides at index 0)
      */
-    public E remove(int index)
-    {
+    public E remove(int index) {
         if (index < 0 || index > listSize - 1) {
             throw new IndexOutOfBoundsException();
         }

@@ -12,15 +12,13 @@
 import java.util.EmptyStackException;
 
 
-public class ArrayStack<E>
-{
+public class ArrayStack<E> {
 
     private E[] stack; //Underlying structure of stack is an array
     private int size; //This variable will represent the number of items in the stack
 
-    ArrayStack()
-    {
-        stack = (E[]) new Object[1];
+    public ArrayStack() {
+        this.stack = (E[]) new Object[1];
         this.size = 0;
     }
 
@@ -34,10 +32,8 @@ public class ArrayStack<E>
         return (size == 0);
     }
 
-    public E pop()
-    {
-        if(isEmpty())
-        {
+    public E pop() {
+        if (isEmpty()) {
             throw new EmptyStackException();
         }
 
@@ -45,55 +41,46 @@ public class ArrayStack<E>
         stack[size] = null;
 
         //Decrease size of array by 1/2 if stack is 1/4 of array size
-        if(size > 0 && (size == (stack.length) / 4))
-        {
+        if (size > 0 && (size == (stack.length) / 4)) {
             resize(stack.length/2);
         }
 
         return removedItem;
     }
 
-    public void push(E item)
-    {
+    public void push(E item) {
         //Resize array to 2x size if stack is full
-        if (size == stack.length)
-        {
+        if (size == stack.length) {
             resize(2 * stack.length);
         }
 
         stack[size++] = item;
     }
 
-
-    public E peek()
-    {
-        if(isEmpty())
-        {
+    public E peek() {
+        if (isEmpty()) {
             throw new EmptyStackException();
         }
+
         return stack[size-1];
     }
 
-    private void resize(int newSize)
-    {
+    private void resize(int newSize) {
         //Create a new temporary array and copy the elements over
         E[] resizedStack = (E[]) new Object[newSize];
 
-        for(int i = 0; i < size; ++i)
-        {
+        for (int i = 0; i < size; ++i) {
             resizedStack[i] = stack[i];
         }
 
         stack = resizedStack;
     }
 
-
     /**
     Main method to test the methods of the ArrayStack class
      */
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ArrayStack<Integer> stackOfInts = new ArrayStack<Integer>();
 
         System.out.println("Stack size: " + stackOfInts.getSize());
@@ -101,31 +88,25 @@ public class ArrayStack<E>
         System.out.println("Stack empty: " + stackOfInts.isEmpty());
 
         /*
-        try
-        {
+        try {
            stackOfInts.pop(); //should throw exception
         }
-        catch(EmptyStackException e)
-        {
+        catch (EmptyStackException e) {
             System.err.println("Cannot pop - Empty stack");
         }
         */
-
         /*
-        try
-        {
+        try {
             stackOfInts.peek(); //should throw exception
         }
-        catch(EmptyStackException e)
-        {
+        catch (EmptyStackException e) {
             System.err.println("Cannot peek - Empty stack");
         }
         */
 
 
         //Add 10 elements to the stack - print the stack size - print top of each stack - pop item off stack
-        for (int i = 0; i < 11; ++i)
-        {
+        for  (int i = 0; i < 11; ++i) {
             stackOfInts.push(i);
         }
 
@@ -133,34 +114,26 @@ public class ArrayStack<E>
 
         int x = stackOfInts.getSize();
 
-        for (int i = 0; i < x; ++i)
-        {
+        for (int i = 0; i < x; ++i) {
             System.out.println("Top of stack is: " + stackOfInts.peek());
             stackOfInts.pop();
         }
 
-
         /*
-        try
-        {
+        try {
             stackOfInts.pop(); //should throw exception
         }
-        catch(EmptyStackException e)
-        {
+        catch (EmptyStackException e) {
             System.err.println("Cannot pop - Empty stack");
         }
         */
-
         /*
-        try
-        {
+        try {
             stackOfInts.peek(); //should throw exception
         }
-        catch(EmptyStackException e)
-        {
+        catch (EmptyStackException e) {
             System.err.println("Cannot peek - Empty stack");
         }
         */
-
     }
 }
