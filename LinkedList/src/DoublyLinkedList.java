@@ -44,7 +44,7 @@ public class DoublyLinkedList<E> {
      */
     public void add(E data) {
         if (isEmpty()) {
-            addToHead(data);
+            addFirst(data);
             return;
         }
 
@@ -66,7 +66,7 @@ public class DoublyLinkedList<E> {
         }
 
         if (index == 0) {
-            addToHead(data);
+            addFirst(data);
             return;
         }
 
@@ -83,7 +83,7 @@ public class DoublyLinkedList<E> {
      *
      * @param data - Holds the element to be added
      */
-    public void addToHead(E data) {
+    public void addFirst(E data) {
         Node insertNode = new Node();
 
         //Adding to an empty list
@@ -95,6 +95,7 @@ public class DoublyLinkedList<E> {
             tail = head;
         }
         else {
+            insertNode.data = data;
             insertNode.next = head;
             insertNode.previous = head.previous;
             head.previous = insertNode;
@@ -189,7 +190,7 @@ public class DoublyLinkedList<E> {
     /**
      * Clear the doubly linked list
      */
-    public void clearDoublyLinkedList() {
+    public void clear() {
         while (head != null) {
             removeFirst();
         }
@@ -199,7 +200,7 @@ public class DoublyLinkedList<E> {
     /**
      * @return - Returns the list size
      */
-    public int getsize() {
+    public int size() {
         return size;
     }
 
@@ -215,7 +216,7 @@ public class DoublyLinkedList<E> {
     /**
      * Print the list elements
      */
-    public void printDoublyLinkedList() {
+    public void print() {
         Node current = head;
 
         while (current != null) {
@@ -232,7 +233,7 @@ public class DoublyLinkedList<E> {
             throw new IndexOutOfBoundsException();
         }
 
-        if (index < getsize()/2) {
+        if (index < size()/2) {
             Node current = head;
             int indexCounter = 0;
             while (indexCounter != index) {
@@ -243,18 +244,13 @@ public class DoublyLinkedList<E> {
         }
         else {
             Node current = tail;
-            int indexCounter = getsize() - 1;
+            int indexCounter = size() - 1;
             while (indexCounter != index) {
                 current = current.previous;
                 --indexCounter;
             }
             return current;
         }
-    }
-
-    //Test the various methods of the DoublyLinkedList class
-    public static void main(String[] args) {
-        DoublyLinkedList<String> list = new DoublyLinkedList<>();
     }
 }
 

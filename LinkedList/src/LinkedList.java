@@ -34,15 +34,19 @@ public class LinkedList<E> {
 
     public void addFirst(E data) {
         Node newNode = new Node(data);
-        newNode.next = head;
-        head = newNode;
+
+        if (isEmpty()) {
+            head = newNode;
+        }
+        else {
+            newNode.next = head;
+            head = newNode;
+        }
         ++size;
     }
 
     //Adds a node to the end of the linked list
     public void add(E data) {
-        Node newNode = new Node(data);
-
         if (isEmpty()) {
             addFirst(data);
             return;
@@ -52,6 +56,7 @@ public class LinkedList<E> {
         while (current.next != null) {
             current = current.next;
         }
+        Node newNode = new Node(data);
         current.next = newNode;
 
         ++size;
@@ -136,7 +141,7 @@ public class LinkedList<E> {
         return current.data;
     }
 
-    public int Size() {
+    public int size() {
         return size;
     }
 
