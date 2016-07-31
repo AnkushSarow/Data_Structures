@@ -52,7 +52,7 @@ public class DoublyLinkedListTest {
      */
 
     @Test
-    public void testAddToIndex() {
+    public void testAdd_toIndex() {
         DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
 
         list.add(10);
@@ -68,7 +68,7 @@ public class DoublyLinkedListTest {
      * if the list has at least one item in it (minimum: index 0 is occupied)
      */
     @Test (expected = IndexOutOfBoundsException.class)
-    public void testAddToIndexException() {
+    public void testAdd_toIndexOutOfRange() {
         DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
         list.add(0,0);
     }
@@ -119,7 +119,7 @@ public class DoublyLinkedListTest {
      * Testing remove(int index). Removes the item at the index.
      */
     @Test
-    public void testRemoveIndex() {
+    public void testRemove_index() {
         DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
 
         for (int i = 0; i < 10; ++i) {
@@ -145,7 +145,7 @@ public class DoublyLinkedListTest {
      * Testing for exceptions when attempting to remove from an empty doubly linked list
      */
     @Test (expected = NoSuchElementException.class)
-    public void testEmptyRemoveFirstException() {
+    public void testRemoveFirst_emptyList() {
         DoublyLinkedList<String> list = new DoublyLinkedList<>();
         list.removeFirst();
     }
@@ -153,7 +153,7 @@ public class DoublyLinkedListTest {
      * Testing for exceptions when attempting to remove from outside the doubly linked list range
      */
     @Test (expected = IndexOutOfBoundsException.class)
-    public void testRemoveException() {
+    public void testRemove_outOfRange() {
         DoublyLinkedList<String> list = new DoublyLinkedList<>();
         list.add("A");
         list.add("B");
@@ -164,7 +164,7 @@ public class DoublyLinkedListTest {
      * Testing for exceptions when attempting to retrieve from an empty doubly linked list
      */
     @Test (expected = IndexOutOfBoundsException.class)
-    public void testEmptyGetException() {
+    public void testGet_emptyList() {
         DoublyLinkedList<String> list = new DoublyLinkedList<>();
         list.get(0);
     }
@@ -172,7 +172,7 @@ public class DoublyLinkedListTest {
      * Testing for exceptions when attempting to retrieve from outside the doubly linked list range
      */
     @Test (expected = IndexOutOfBoundsException.class)
-    public void testGetException() {
+    public void testGet_outOfRange() {
         DoublyLinkedList<String> list = new DoublyLinkedList<>();
         list.add("A");
         list.get(1);

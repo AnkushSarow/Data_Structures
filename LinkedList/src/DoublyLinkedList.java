@@ -51,7 +51,6 @@ public class DoublyLinkedList<E> {
         Node insertNode = new Node(data, tail.next, tail);
         tail.next = insertNode;
         tail = insertNode;
-
         ++size;
     }
 
@@ -74,7 +73,6 @@ public class DoublyLinkedList<E> {
         Node newNode = new Node(data, current, current.previous);
         current.previous.next = newNode;
         current.previous = newNode;
-
         ++size;
     }
 
@@ -93,8 +91,7 @@ public class DoublyLinkedList<E> {
             insertNode.next = null;
             head = insertNode;
             tail = head;
-        }
-        else {
+        } else {
             insertNode.data = data;
             insertNode.next = head;
             insertNode.previous = head.previous;
@@ -120,10 +117,10 @@ public class DoublyLinkedList<E> {
         if (size > 1) {
             head.previous = null;
         }
+
         if (size == 1) {
             tail = head;
         }
-
         --size;
     }
 
@@ -144,7 +141,6 @@ public class DoublyLinkedList<E> {
         current.next = null;
         tail.previous = null;
         tail = current;
-
         --size;
     }
 
@@ -175,8 +171,8 @@ public class DoublyLinkedList<E> {
         (current.next).previous = current.previous;
         current.next = null;
         current.previous = null;
-
         --size;
+
         return current.data;
     }
 
@@ -184,6 +180,7 @@ public class DoublyLinkedList<E> {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
+
         return findNode(index).data;
     }
 
@@ -241,8 +238,7 @@ public class DoublyLinkedList<E> {
                 ++indexCounter;
             }
             return current;
-        }
-        else {
+        } else {
             Node current = tail;
             int indexCounter = size() - 1;
             while (indexCounter != index) {

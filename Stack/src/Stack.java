@@ -18,6 +18,7 @@ public class Stack<E> {
             this.next = null;
             this.data = data;
         }
+
         public Node(E data, Node next) {
             this.next = next;
             this.data = data;
@@ -43,6 +44,7 @@ public class Stack<E> {
         Node oldTop = stackTop;
         stackTop = stackTop.next;
         --size;
+
         return oldTop.data;
     }
 
@@ -54,7 +56,11 @@ public class Stack<E> {
         return stackTop.data;
     }
 
-    public boolean isEmpty() { return size == 0; }
+    public boolean isEmpty() {
+        return size == 0;
+    }
 
-    public int size() { return size; }
+    public int size() {
+        return size;
+    }
 }

@@ -12,7 +12,7 @@ public class LinkedListTest {
      * Testing empty linked list to ensure size() = 0 and isEmpty returns true
      */
     @Test
-    public void testLinkedListConstructor() {
+    public void testLinkedList_constructor() {
         LinkedList<Integer> list = new LinkedList<>();
         assertEquals(0, list.size());
         assertEquals(true, list.isEmpty());
@@ -51,7 +51,7 @@ public class LinkedListTest {
      * index is out of range, an exception is  thrown (test for this below)
      */
     @Test
-    public void testAddToIndex() {
+    public void testAdd_toIndex() {
         LinkedList<Integer> list = new LinkedList<>();
 
         list.add(10);
@@ -67,7 +67,7 @@ public class LinkedListTest {
      * if the list has at least one item in it (minimum: index 0 is occupied)
      */
     @Test (expected = IndexOutOfBoundsException.class)
-    public void testAddToIndexException() {
+    public void testAdd_toIndexBeyondRange() {
         LinkedList<Integer> list = new LinkedList<>();
         list.add(0,0);
     }
@@ -93,7 +93,7 @@ public class LinkedListTest {
      * Testing remove(int index). Removes the item at the index.
      */
     @Test
-    public void testRemoveIndex() {
+    public void testRemove_index() {
         LinkedList<Integer> list = new LinkedList<>();
 
         for (int i = 0; i < 10; ++i) {
@@ -119,7 +119,7 @@ public class LinkedListTest {
      * Testing for exceptions when attempting to remove from an empty linked list
      */
     @Test (expected = NoSuchElementException.class)
-    public void testEmptyRemoveException() {
+    public void testRemove_emptyLinkedList() {
         LinkedList<String> list = new LinkedList<>();
         list.remove();
     }
@@ -127,7 +127,7 @@ public class LinkedListTest {
      * Testing for exceptions when attempting to remove from outside the linked list range
      */
     @Test (expected = IndexOutOfBoundsException.class)
-    public void testRemoveException() {
+    public void testRemove_outOfRange() {
         LinkedList<String> list = new LinkedList<>();
         list.add("A");
         list.add("B");
@@ -138,7 +138,7 @@ public class LinkedListTest {
      * Testing for exceptions when attempting to retrieve from an empty linked list
      */
     @Test (expected = IndexOutOfBoundsException.class)
-    public void testEmptyGetException() {
+    public void testGet_emptyLinkedList() {
         LinkedList<String> list = new LinkedList<>();
         list.get(0);
     }
@@ -146,7 +146,7 @@ public class LinkedListTest {
      * Testing for exceptions when attempting to retrieve from outside the linked list range
      */
     @Test (expected = IndexOutOfBoundsException.class)
-    public void testGetException() {
+    public void testGet_outOfRange() {
         LinkedList<String> list = new LinkedList<>();
         list.add("A");
         list.get(1);

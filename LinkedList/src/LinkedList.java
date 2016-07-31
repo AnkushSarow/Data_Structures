@@ -37,8 +37,7 @@ public class LinkedList<E> {
 
         if (isEmpty()) {
             head = newNode;
-        }
-        else {
+        } else {
             newNode.next = head;
             head = newNode;
         }
@@ -58,7 +57,6 @@ public class LinkedList<E> {
         }
         Node newNode = new Node(data);
         current.next = newNode;
-
         ++size;
     }
 
@@ -82,7 +80,6 @@ public class LinkedList<E> {
         }
         Node newNode = new Node(data, current.next);
         current.next = newNode;
-
         ++size;
     }
 
@@ -121,8 +118,8 @@ public class LinkedList<E> {
         current.next = current.next.next;
         //Now set the temp node that is meant to be removed to point to null
         tempNode.next = null;
-
         --size;
+
         return (tempNode.data);
     }
 
@@ -154,7 +151,6 @@ public class LinkedList<E> {
         while (head != null) {
             remove();
         }
-
         size = 0;
     }
 
