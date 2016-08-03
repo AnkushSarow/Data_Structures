@@ -27,7 +27,7 @@ public class Stack<E> {
 
     public Stack() {
         this.stackTop = null;
-        size = 0;
+        this.size = 0;
     }
 
     public void push(E data) {

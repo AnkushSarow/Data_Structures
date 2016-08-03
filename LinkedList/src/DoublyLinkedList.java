@@ -32,9 +32,9 @@ public class DoublyLinkedList<E> {
     }
 
     public DoublyLinkedList() {
-        size = 0;
-        head = new Node();
-        tail = new Node();
+        this.size = 0;
+        this.head = null;
+        this.tail = null;
     }
 
     /**

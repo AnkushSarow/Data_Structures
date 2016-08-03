@@ -19,6 +19,7 @@ public class LinkedList<E> {
 
         public Node(E data) {
             this.data = data;
+            this.next = null;
         }
 
         public Node(E data, Node next) {
@@ -28,8 +29,8 @@ public class LinkedList<E> {
     }
 
     public LinkedList() {
-        this.head = new Node(null);
-        size = 0;
+        this.head = null;
+        this.size = 0;
     }
 
     public void addFirst(E data) {
