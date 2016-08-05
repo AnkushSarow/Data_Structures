@@ -102,7 +102,7 @@ public class HashMap<K,V> {
         current.next = entry;
         ++size;
 
-        if ((double) size / (double) tableSize >= 0.75) {
+        if ((double) size / (double) tableSize >= LOAD_FACTOR) {
             resize();
         }
 
@@ -211,12 +211,9 @@ public class HashMap<K,V> {
         //Make a new table with twice the size and initialize it
         Entry[] oldTable = table;
         table = (Entry[]) Array.newInstance(Entry.class, 2 * tableSize);
-        this.tableSize = 2 * getTableSize();
+        tableSize *= 2;
         size = 0;
-
-        for (int i = 0; i < table.length; ++i) {
-            table[i] = new Entry(null,null,null,null);
-        }
+        initalizeTable();
 
         for (int i = 0; i < oldTable.length; ++i) {
             Entry current = oldTable[i];
@@ -228,6 +225,5 @@ public class HashMap<K,V> {
                 }
             }
         }
-
     }
 }
