@@ -1,12 +1,5 @@
 # Data_Structures
 
-In this repo, I will practice the implementation of various data structures and algorithms.
+In this repo, I will practice the basic implementation of various data structures. 
 
-Currently implemented: 
-  
-  Data Structures:
-  
-    Linked list - singly and doubly
-    Stack (resizable array and linked list)
-    
     
