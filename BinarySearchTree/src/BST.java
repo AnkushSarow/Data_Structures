@@ -40,7 +40,7 @@ public class BST<E extends Comparable<E>> {
      * @param data - holds the element to be added
      */
     public void insert(E data) {
-        this.root = insert(data,this.root);
+        root = insert(data, root);
     }
     /**
      * Helper function for insert(E data). Based on the structure of this method,
@@ -50,15 +50,14 @@ public class BST<E extends Comparable<E>> {
      */
     private Node insert(E data, Node node) {
         if (node == null) {
-            Node newNode = new Node(data);
-            node = newNode;
+            node = new Node(data);
             ++size;
         }
         else if (node.data.compareTo(data) > 0) {
-            node.left = insert(data,node.left);
+            node.left = insert(data, node.left);
         }
         else if (node.data.compareTo(data) < 0) {
-            node.right = insert(data,node.right);
+            node.right = insert(data, node.right);
         }
         else {
             return node;
@@ -72,7 +71,7 @@ public class BST<E extends Comparable<E>> {
      * @param data - desired element to be removed
      */
     public void delete(E data) {
-        delete(data,this.root, null);
+        delete(data, root, null);
     }
     /**
      * Delete helper function
@@ -88,14 +87,15 @@ public class BST<E extends Comparable<E>> {
         //Data match
         //Now, must check for the 3 cases
         //1: the node is a leaf
-        //2: the node has only one child (right OR left)
-        //3: the node has two children
+        //2: the node has only one child (right OR left) - Set parent's link to the node's child
+        //3: the node has two children - replace the data with the minimum data in the right subtree
+        //3: - then call delete with this data value in the nodes right subtree (it will encounter case 1 or 2)
         //Also note, the parent check is to determine if the node is to the left or to the right of the parent
         if (node.data.compareTo(data) == 0) {
-            //Case 1:
+            //Case 1
             if (node.left == null && node.right == null) {
                 if (node == root) {
-                    this.root = null;
+                    root = null;
 
                 }
                 else if (parent.left == node) {
@@ -105,9 +105,9 @@ public class BST<E extends Comparable<E>> {
                 }
                 --size;
                 return;
-            } else if (node.left == null) {
-                if (node == this.root) { //If the node is the root, make the root point to the next node
-                    this.root = null;
+            } else if (node.left == null) {   //Case 2
+                if (node == this.root) {      //If the node is the root, make the root point to the next node
+                    root = null;
                     root = node.right;
                 } else if (node == parent.left) {
                     parent.left = node.right;
@@ -118,7 +118,7 @@ public class BST<E extends Comparable<E>> {
                 return;
             } else if (node.right == null) {
                 if (node == this.root) {
-                    this.root = null;
+                    root = null;
                     root = node.left;
 
                 } else if (node == parent.left) {
@@ -128,7 +128,7 @@ public class BST<E extends Comparable<E>> {
                 }
                 --size;
                 return;
-            } else {
+            } else {                         //Case 3
                 node.data = min(node.right);
                 delete(node.data, node.right, node);
             }
@@ -137,15 +137,15 @@ public class BST<E extends Comparable<E>> {
         //If search data is greater than the data in the node, proceed to the right node only if it is not null
         //If the node is null, the item is not in the BST, use return to end the method
         } else if (node.data.compareTo(data) > 0) {
-            if(node.left == null) {
+            if (node.left == null) {
                 return;
             }
-            delete(data,node.left,node);
+            delete(data, node.left, node);
         } else {
             if (node.right == null) {
                 return;
             }
-            delete(data,node.right,node);
+            delete(data, node.right, node);
         }
     }
 
@@ -255,7 +255,7 @@ public class BST<E extends Comparable<E>> {
 
         Queue<Node> nodeQueue = new LinkedList<>();
         nodeQueue.add(node);
-        
+
         while (!nodeQueue.isEmpty()) {
             Node current = nodeQueue.peek();
             System.out.print(current.data + " ");
@@ -274,7 +274,7 @@ public class BST<E extends Comparable<E>> {
      * @return True if the BST is empty - False if it contains at least one element
      */
     public boolean isEmpty() {
-        return this.root == null;
+        return root == null;
     }
 
     /**
