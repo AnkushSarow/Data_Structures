@@ -2,7 +2,11 @@
  * Practice the implementation of quicksort
  */
 
+import java.util.Arrays;
+import java.util.Random;
+
 public class Quicksort {
+    private static Random rand = new Random();
 
     private Quicksort() {
     }
@@ -32,12 +36,15 @@ public class Quicksort {
      * @return pivotIndex - The integer value representing the position of the pivot in the array
      */
     private static <T extends Comparable<T>> int partition(T[] array, int start, int end) {
-        int pivotIndex = start;
+        //Choose a random pivot and swap it with the end.
+        int pivot = start + rand.nextInt(end - start + 1);
+        swap(array, pivot, end);
         T pivotItem = array[end];
+        int pivotIndex = start;
 
         for (int i = start; i < end; ++i) {
             if (array[i].compareTo(pivotItem) <= 0) {
-                swap(array, i, pivotIndex);
+                swap(array, pivotIndex, i);
                 ++pivotIndex;
             }
         }
