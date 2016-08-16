@@ -1,8 +1,3 @@
-/**
- * Created by AnkushSarow on 8/16/16.
- */
-
-import static org.junit.Assert.*;
 import org.junit.Test;
 import java.util.Arrays;
 import java.util.Random;
@@ -26,7 +21,7 @@ public class MergesortTest {
         Mergesort.sort(array);
         System.out.println("Integer array after sorting: " + Arrays.toString(array));
 
-        //Testing sorting on int array with 10 random values ranging from 1 to 10
+        //Testing sorting on int array with 15 random values ranging from 1 to 15
         for (int i = 0; i < 15; ++i) {
             array2[i] = rand.nextInt(15) + 1;
         }
@@ -41,7 +36,7 @@ public class MergesortTest {
         Mergesort.sort(array3);
         System.out.println("String array after sorting: " + Arrays.toString(array3));
 
-        //Test sorting on string array with five values
+        //Test sorting on string array with six values
         array4[0] = "D";
         array4[1] = "B";
         array4[2] = "A";
